@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const Database = require('./src/core/database');
-
 const apiRoutes = require('./src/routes');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -19,6 +21,25 @@ app.get('/', (req, res) => {
     // res.send('hola mundo');
 });
 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+// Swagger Config
+const swaggerOptions = {
+    swaggerDefinition: {
+        swagger: '2.0',
+        info: {
+            title: 'ITESO Chat API',
+            description: 'A live chat web application',
+            version: '1.0.0',
+            servers: ['http://localhost:'+port]
+        }
+    },
+    apis: ['./src/modules/**/*.routes.js']
+}
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 Database.connect().then(() => {
     // Listen to port

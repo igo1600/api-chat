@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
-const mongoUrl = 'mongodb+srv://<username>:<password>@cluster0.jqhyj.mongodb.net/<database>?retryWrites=true&w=majority';
+const mongoUrl = process.env.MONGO_URL;
 
 const Database = {
     dbInstance: null,
