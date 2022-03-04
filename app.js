@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const Database = require('./src/core/database');
 
 const apiRoutes = require('./src/routes');
 
@@ -19,6 +20,9 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(port, function() {
-    console.log(`app is running in port ${port}...`);
+Database.connect().then(() => {
+    // Listen to port
+    app.listen(port, () => {
+        console.log('App is listening to port ' + port);
+    });
 });
