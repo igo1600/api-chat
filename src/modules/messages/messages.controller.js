@@ -7,6 +7,7 @@ const MessagesController = {
             res.send(results);
         });
     },
+
     getOne: (req, res) => {
         const message = new Message();
         message.getOne(req.params.id).then(result => {
@@ -17,6 +18,7 @@ const MessagesController = {
             }
         });
     },
+    
     create: (req, res) => {
         res.send('create message');
     }

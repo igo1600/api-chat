@@ -28,6 +28,20 @@ class Model {
             _id: ObjectId(id)
         });
     }
+
+
+
+    create(data) {
+        return new Promise((accept, reject) => {
+            this.collection.insertOne(data, (err, result) => {
+                if(err) {
+                    reject(err);
+                } 
+                accept(result);
+            })
+        }) 
+    }
+    
 }
 
 module.exports = Model;

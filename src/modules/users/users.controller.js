@@ -7,6 +7,8 @@ const UsersController = {
             res.send(results);
         });
     },
+
+
     getOne: (req, res) => {
         const user = new User();
         user.getOne(req.params.id).then(result => {
@@ -17,9 +19,30 @@ const UsersController = {
             }
         });
     },
+
     create: (req, res) => {
-        res.send('create user');
+        const user = new User();
+        const body = req.body;
+        user.create(body).then(result => {
+            body.id = result.insertedId;
+            res.json(body.id);
+        }).catch((err) => {
+            res.sendStatus(500);
+        });
+    },
+
+
+    verify: (req, res, next) =>{
+        const user = new User();
+        const body = req.body;
+        user.searchUser(body.email).then(result => {
+            
+        })
     }
+
+    
+
+
 }
 
 module.exports = UsersController;

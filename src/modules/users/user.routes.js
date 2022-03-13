@@ -32,5 +32,18 @@ router.get('/', controller.getAll);
  */
 router.get('/:id', controller.getOne);
 
+/**
+ * @swagger
+ *   /api/users/:
+ *     get:
+ *       tags:
+ *       - Users
+ *       description: Post a new user
+ *       responses:
+ *         200:
+ *           description: Sign up with a new user
+ */
+router.post('/', controller.verify, controller.create);
+
 module.exports = router;
 

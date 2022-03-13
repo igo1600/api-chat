@@ -17,8 +17,20 @@ const ChannelsController = {
             }
         });
     },
+    
     create: (req, res) => {
         res.send('create channel');
+    },
+
+    delete: (req, res) => {
+        const channel = new Channel();
+        channel.getOne(req.params.id).then(result => {
+            if(result) {
+                res.send('channel deleted');
+            } else {
+                res.sendStatus(404);
+            }
+        });
     }
 }
 
